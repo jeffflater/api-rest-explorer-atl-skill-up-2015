@@ -34,11 +34,19 @@ app.post('/rest/explorer', function(req, res){
         url: req.body.baseUrl+'Login/Login',
         formData: {
             UserName: req.body.username,
-            Password: req.body.password,
+            Password: req.body.password
         }
     };
 
-    var apiOptions = {
+    var apiGetOptions = {
+        url: req.body.baseUrl+req.body.restPath,
+        headers: {
+            'Connection': 'keep-alive',
+            'Referer': req.body.baseUrl+'Login/Login'
+        }
+    };
+
+    var apiPostOptions = {
         url: req.body.baseUrl+req.body.restPath,
         form: JSON.parse(req.body.data),
         headers: {
@@ -80,7 +88,11 @@ app.post('/rest/explorer', function(req, res){
         console.log('error - '+error);
         console.log('response.statusCode - '+response.statusCode);
 
-        request.post(apiOptions, apiCallback);
+        if (req.body.method === 'GET') {
+            request.get(apiGetOptions, apiCallback);
+        } else {
+            request.post(apiPostOptions, apiCallback);
+        }
     }
 
     request.get({

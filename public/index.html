@@ -33,16 +33,16 @@
                     <div class="control-group">
                         <label class="control-label" for="tbRestPath">Rest Path</label>
                         <div class="controls">
-                            <input ng-model="request.restPath" style="width: 300px;" id="tbRestPath" name="tbRestPath" type="text" class="input-xlarge" required>
+                            <input ng-model="request.restPath" style="width: 600px;" id="tbRestPath" name="tbRestPath" type="text" class="input-xlarge" required>
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label" for="radios">Method</label>
                         <div class="controls">
-                                <input ng-model="request.method" type="radio" name="radios" id="radios-0" value="GET" checked="checked">
+                                <input ng-change="toggleMethod()" ng-model="request.method" type="radio" name="radios" id="radios-0" value="GET" checked="checked">
                                 GET
-                                <input ng-model="request.method" type="radio" name="radios" id="radios-1" value="POST">
+                                <input ng-change="toggleMethod()" ng-model="request.method" type="radio" name="radios" id="radios-1" value="POST">
                                 POST
                         </div>
                     </div>
@@ -61,14 +61,14 @@
                         </div>
                     </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="tbRequest">Request</label>
+                    <div class="control-group" ng-show="hasPostData">
+                        <label class="control-label" for="tbRequest">Post Data</label>
                         <div class="controls">
                             <textarea ng-model="request.data" id="tbRequest" name="tbRequest" style="width: 600px; height: 200px;"></textarea>
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group" style="padding-top: 10px;">
                         <div class="controls">
                             <button ng-click="fireRequest()" id="singlebutton" name="singlebutton" class="btn btn-primary"
                                     ng-disabled="disableButton" ng-show="!disableButton">Request</button>
