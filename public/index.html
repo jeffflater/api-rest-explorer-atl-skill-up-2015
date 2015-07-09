@@ -92,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group" ng-show="hasResponseData">
                         <label class="control-label" for="tbResponse">Response Data</label>
                         <button style="margin-left: 5px; margin-top: 25px;" class="btn btn-default pull-right" clip-copy="request.response" clip-click="copyResponseData()">Copy!</button>
                         <div class="controls">
@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    <div class="control-group" style="padding-top: 10px;">
+                    <div class="control-group" style="padding-top: 10px;" ng-show="hasResponseData">
                         <div class="controls">
                             <button class="btn btn-primary" ng-click="clearResponseData()">Clear</button>
                         </div>

@@ -45,6 +45,7 @@ angular.module("explorer", [
         $scope.disableButton = false;
 
         $scope.hasPostData = true;
+        $scope.hasResponseData = false;
 
         $scope.toggleMethod = function () {
             $scope.hasPostData = $scope.request.method==='GET' ? false : true;
@@ -66,8 +67,10 @@ angular.module("explorer", [
             if($scope.request.username === '' || $scope.request.password === ''){
             }else{
                 $scope.disableButton = true;
+                $scope.request.response = '';
                 apiService.makeRequest($scope.request).then(function(result){
                     $scope.disableButton = false;
+                    $scope.hasResponseData = true;
                     $scope.request.response = angular.toJson(result.json, true);
                 }),function(error){
                     alert(error);
