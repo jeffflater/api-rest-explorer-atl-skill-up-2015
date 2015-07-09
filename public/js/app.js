@@ -28,6 +28,12 @@ angular.module("explorer", [])
     })
     .controller('AppCtrl', function AppCtrl($scope, apiService) {
 
+        $scope.hasPostData = false;
+
+        $scope.toggleMethod = function () {
+            $scope.hasPostData = $scope.request.method==='GET' ? false : true;
+        };
+
         var exampleData = { fileName: '4%25',
             attributes:'',
             drawer:'',
