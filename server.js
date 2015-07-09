@@ -62,22 +62,35 @@ app.post('/rest/explorer', function(req, res){
         console.log('response: '+response);
         console.log('body: '+body);
 
-        var data = JSON.parse(body);
+        try{
+            var data = JSON.parse(body);
 
-        console.log('error - '+error);
-        console.log('response.statusCode - '+response.statusCode);
-        console.log('data - '+data);
+            console.log('error - '+error);
+            console.log('response.statusCode - '+response.statusCode);
+            console.log('data - '+data);
 
-        var restResponse = {
-            error: error,
-            statusCode: response.statusCode,
-            json: JSON.stringify(data)
-        };
+            var restResponse = {
+                error: error,
+                statusCode: response.statusCode,
+                json: data
+            };
 
-        res.send(restResponse);
+            res.send(restResponse);
 
-        res.end();
+            res.end();
 
+        }catch(error){
+            var data = {
+                "Message": "Bad Rest Path"
+            };
+            console.log('bad rest path');
+            res.send({
+                error: error,
+                statusCode: response.statusCode,
+                json: data
+            });
+            res.end();
+        }
     }
 
     function loginCallback (error, response, body) {
@@ -90,7 +103,11 @@ app.post('/rest/explorer', function(req, res){
         console.log('response.statusCode - '+response.statusCode);
 
         if (req.body.method === 'GET') {
-            request.get(apiGetOptions, apiCallback);
+            try{
+                request.get(apiGetOptions, apiCallback);
+            }catch(error){
+                console.log('TEEHEE ERROR', error);
+            }
         } else {
             request.post(apiPostOptions, apiCallback);
         }

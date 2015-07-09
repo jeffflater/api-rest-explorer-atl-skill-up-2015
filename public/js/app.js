@@ -63,13 +63,16 @@ angular.module("explorer", [
         };
 
         $scope.fireRequest = function () {
-            $scope.disableButton = true;
-            apiService.makeRequest($scope.request).then(function(result){
-                $scope.disableButton = false;
-                $scope.request.response = angular.toJson(JSON.parse(result.json), true);
-            }),function(error){
-                alert(error);
-            };
+            if($scope.request.username === '' || $scope.request.password === ''){
+            }else{
+                $scope.disableButton = true;
+                apiService.makeRequest($scope.request).then(function(result){
+                    $scope.disableButton = false;
+                    $scope.request.response = JSON.stringify(result.json);
+                }),function(error){
+                    alert(error);
+                };
+            }
         };
 
         $scope.clearResponse = function () {
