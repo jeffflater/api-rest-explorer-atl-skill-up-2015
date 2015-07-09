@@ -15,6 +15,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var beautify = require('js-beautify').js_beautify;
 
 app.configure(function(){
     app.use(express.bodyParser());
@@ -23,8 +24,8 @@ app.configure(function(){
 
 app.use(express.static(path.join(__dirname, 'public')));// jshint ignore:line
 
-
 app.post('/rest/explorer', function(req, res){
+
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -70,7 +71,7 @@ app.post('/rest/explorer', function(req, res){
         var restResponse = {
             error: error,
             statusCode: response.statusCode,
-            json: data
+            json: beautify(JSON.stringify(data))
         };
 
         res.send(restResponse);

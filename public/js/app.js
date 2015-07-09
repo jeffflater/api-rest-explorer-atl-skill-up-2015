@@ -1,4 +1,4 @@
-angular.module("explorer", [])
+angular.module("explorer", ['ui.ace'])
     .service('apiService', function ($http) {
 
         this.makeRequest = function (request) {
@@ -52,7 +52,7 @@ angular.module("explorer", [])
             $scope.disableButton = true;
             apiService.makeRequest($scope.request).then(function(result){
                 $scope.disableButton = false;
-                $scope.request.response = JSON.stringify(result.json);
+                $scope.request.response = angular.toJson(JSON.parse(result.json), true);
             }),function(error){
                 alert(error);
             };
