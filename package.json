@@ -15,7 +15,6 @@
     "jasmine-before-all": "^0.1.0",
     "jasmine-core": "^2.3.4",
     "jasmine-node-karma": "^1.6.1",
-    "js-beautify": "^1.5.10",
     "karma": "^0.12.37",
     "karma-jasmine": "^0.3.6",
     "path": "^0.11.14",

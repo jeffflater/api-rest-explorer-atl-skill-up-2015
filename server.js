@@ -71,7 +71,7 @@ app.post('/rest/explorer', function(req, res){
         var restResponse = {
             error: error,
             statusCode: response.statusCode,
-            json: beautify(JSON.stringify(data))
+            json: JSON.stringify(data)
         };
 
         res.send(restResponse);
