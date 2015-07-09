@@ -66,12 +66,14 @@ angular.module("explorer", [
         $scope.fireRequest = function () {
             if($scope.request.username === '' || $scope.request.password === ''){
             }else{
+                growl.warning('Request sent to API...');
                 $scope.disableButton = true;
                 $scope.request.response = '';
                 apiService.makeRequest($scope.request).then(function(result){
                     $scope.disableButton = false;
                     $scope.hasResponseData = true;
                     $scope.request.response = angular.toJson(result.json, true);
+                    growl.success('Request is successful!');
                 }),function(error){
                     alert(error);
                 };
