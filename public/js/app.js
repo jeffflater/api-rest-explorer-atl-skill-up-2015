@@ -30,23 +30,18 @@ angular.module("explorer", [])
 
         $scope.disableButton = false;
 
-        $scope.hasPostData = false;
+        $scope.hasPostData = true;
 
         $scope.toggleMethod = function () {
             $scope.hasPostData = $scope.request.method==='GET' ? false : true;
         };
 
-        var exampleData = { fileName: '4%25',
-            attributes:'',
-            drawer:'',
-            fileMarks:'',
-            fileNumber:'',
-            fileType:'' };
+        var exampleData = {FileName: "%"};
 
         $scope.request = {
             baseUrl: 'https://con-kblazina2.vertafore.com/ImageRight.Web.Client/',
-            restPath: 'Search/GetResults',
-            method: 'GET',
+            restPath: 'api/files/find',
+            method: 'POST',
             username: '',
             password: '',
             data: JSON.stringify(exampleData),
