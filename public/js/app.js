@@ -75,7 +75,7 @@ angular.module("explorer", [
             }
         };
 
-        $scope.clearResponse = function () {
+        $scope.clearResponseData = function () {
             $scope.request.response = '';
             growl.success('Response data has been cleared!');
         };
