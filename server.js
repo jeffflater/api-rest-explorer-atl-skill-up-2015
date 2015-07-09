@@ -15,7 +15,6 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-var beautify = require('js-beautify').js_beautify;
 
 app.configure(function(){
     app.use(express.bodyParser());
