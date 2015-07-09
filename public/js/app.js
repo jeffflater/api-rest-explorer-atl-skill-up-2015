@@ -68,7 +68,7 @@ angular.module("explorer", [
                 $scope.disableButton = true;
                 apiService.makeRequest($scope.request).then(function(result){
                     $scope.disableButton = false;
-                    $scope.request.response = JSON.stringify(result.json);
+                    $scope.request.response = angular.toJson(result.json, true);
                 }),function(error){
                     alert(error);
                 };
