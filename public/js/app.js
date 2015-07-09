@@ -1,4 +1,10 @@
-angular.module("explorer", ['ui.ace'])
+angular.module("explorer", [
+        'ui.ace',
+        'ngClipboard'
+])
+    .config(['ngClipProvider', function(ngClipProvider) {
+        ngClipProvider.setPath("//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.swf");
+    }])
     .service('apiService', function ($http) {
 
         this.makeRequest = function (request) {
