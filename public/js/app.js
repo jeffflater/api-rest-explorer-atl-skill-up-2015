@@ -1,4 +1,10 @@
-angular.module("explorer", [])
+angular.module("explorer", [
+        'ui.ace',
+        'ngClipboard'
+])
+    .config(['ngClipProvider', function(ngClipProvider) {
+        ngClipProvider.setPath("//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.swf");
+    }])
     .service('apiService', function ($http) {
 
         this.makeRequest = function (request) {
@@ -30,23 +36,18 @@ angular.module("explorer", [])
 
         $scope.disableButton = false;
 
-        $scope.hasPostData = false;
+        $scope.hasPostData = true;
 
         $scope.toggleMethod = function () {
             $scope.hasPostData = $scope.request.method==='GET' ? false : true;
         };
 
-        var exampleData = { fileName: '4%25',
-            attributes:'',
-            drawer:'',
-            fileMarks:'',
-            fileNumber:'',
-            fileType:'' };
+        var exampleData = {FileName: "%"};
 
         $scope.request = {
             baseUrl: 'https://con-kblazina2.vertafore.com/ImageRight.Web.Client/',
-            restPath: 'Search/GetResults',
-            method: 'GET',
+            restPath: 'api/files/find',
+            method: 'POST',
             username: '',
             password: '',
             data: JSON.stringify(exampleData),
