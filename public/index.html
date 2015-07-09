@@ -70,8 +70,8 @@
                     </div>
 
                     <div class="control-group" ng-show="hasPostData">
-                        <label class="control-label" for="tbRequest">Post Data</label>
-                        <button style="margin-left: 5px; margin-top: 25px;" class="btn btn-default pull-right" clip-copy="request.data">Copy!</button>
+                        <label class="control-label" for="tbRequest">Request Data</label>
+                        <button style="margin-left: 5px; margin-top: 25px;" class="btn btn-default pull-right" clip-copy="request.data" clip-click="copyRequestData()">Copy!</button>
                         <div class="controls">
                             <div ng-model="request.data" ui-ace="{
                                 useWrapMode : true,
@@ -93,8 +93,8 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for="tbResponse">Response</label>
-                        <button style="margin-left: 5px; margin-top: 25px;" class="btn btn-default pull-right" clip-copy="request.response">Copy!</button>
+                        <label class="control-label" for="tbResponse">Response Data</label>
+                        <button style="margin-left: 5px; margin-top: 25px;" class="btn btn-default pull-right" clip-copy="request.response" clip-click="copyResponseData()">Copy!</button>
                         <div class="controls">
                             <div ng-model="request.response" ui-ace="{
                                 useWrapMode : true,

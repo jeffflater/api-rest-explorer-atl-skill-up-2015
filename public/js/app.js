@@ -85,4 +85,12 @@ angular.module("explorer", [
             growl.success('Request data has been cleared!');
         };
 
+        $scope.copyRequestData = function () {
+            growl.success('Request data copied!');
+        };
+
+        $scope.copyResponseData = function () {
+            growl.success('Response data copied!');
+        };
+
     });
