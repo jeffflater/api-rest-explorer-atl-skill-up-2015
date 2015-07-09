@@ -1,0 +1,26 @@
+{
+  "name": "api-rest-explorer",
+  "version": "0.0.1",
+  "description": "tool to explorer imageright api",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Jeff Flater",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "express": "3.4.4",
+    "jasmine": "^2.3.1",
+    "jasmine-before-all": "^0.1.0",
+    "jasmine-core": "^2.3.4",
+    "jasmine-node-karma": "^1.6.1",
+    "karma": "^0.12.37",
+    "karma-jasmine": "^0.3.6",
+    "path": "^0.11.14",
+    "request": "^2.58.0",
+    "request-debug": "^0.2.0",
+    "request-json": "^0.5.3",
+    "tough-cookie": "^2.0.0"
+  }
+}

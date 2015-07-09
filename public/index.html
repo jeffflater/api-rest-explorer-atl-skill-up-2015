@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html ng-app="explorer">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script>
+        angular.module("explorer", [])
+                .service('apiService', function ($http) {
+
+                    this.makeRequest = function (request) {
+
+                        var requestData = {
+                            baseUrl: request.baseUrl,
+                            restPath: request.restPath,
+                            method: request.method,
+                            username: request.username,
+                            password: request.password,
+                            data: request.data
+                        };
+
+                        return $http({
+                            url: '/rest/explorer',
+                            method: 'POST',
+                            data: requestData
+                        }).then(function (result) {
+                                    var data = result.data;
+                                    return data;
+                                },
+                                function (result) {
+                                    return result;
+                                });
+                    }
+
+                })
+                .controller('AppCtrl', function AppCtrl($scope, apiService) {
+
+                    var exampleData = { fileName: '4%25',
+                            attributes:'',
+                            drawer:'',
+                            fileMarks:'',
+                            fileNumber:'',
+                            fileType:'' };
+
+                    $scope.request = {
+                        baseUrl: 'https://con-kblazina2.vertafore.com/ImageRight.Web.Client/',
+                        restPath: 'Search/GetResults',
+                        method: 'GET',
+                        username: '',
+                        password: '',
+                        data: JSON.stringify(exampleData),
+                        response: ''
+                    };
+
+                    $scope.fireRequest = function () {
+                        apiService.makeRequest($scope.request).then(function(result){
+                            $scope.request.response = JSON.stringify(result.json);
+                        });
+                    };
+
+                });
+    </script>
+</head>
+<body ng-controller="AppCtrl as app">
+
+<center>
+
+    <table border="0">
+        <tr>
+            <td>
+
+            <form class="form-horizontal">
+                <fieldset>
+
+                    <legend style="padding-top: 20px;">API Rest Explorer</legend>
+
+                    <div class="control-group">
+                        <label class="control-label" for="tbBaseUrl">Base Url</label>
+                        <div class="controls">
+                            <input ng-model="request.baseUrl" style="width: 600px;" id="tbBaseUrl" name="tbBaseUrl" type="text"  class="input-xlarge" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="tbRestPath">Rest Path</label>
+                        <div class="controls">
+                            <input ng-model="request.restPath" style="width: 300px;" id="tbRestPath" name="tbRestPath" type="text" class="input-xlarge" required>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="radios">Method</label>
+                        <div class="controls">
+                                <input ng-model="request.method" type="radio" name="radios" id="radios-0" value="GET" checked="checked">
+                                GET
+                                <input ng-model="request.method" type="radio" name="radios" id="radios-1" value="POST">
+                                POST
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="tbUsername">Username</label>
+                        <div class="controls">
+                            <input ng-model="request.username" style="width: 200px;" id="tbUsername" name="tbUsername" type="text" placeholder="Enter vertafore username" class="input-xlarge" required>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="tbPassword">Password</label>
+                        <div class="controls">
+                            <input ng-model="request.password" style="width: 200px;" id="tbPassword" name="tbPassword" type="password" placeholder="Enter password" class="input-xlarge" required>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="tbRequest">Request</label>
+                        <div class="controls">
+                            <textarea ng-model="request.data" id="tbRequest" name="tbRequest" style="width: 600px; height: 200px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button ng-click="fireRequest()" id="singlebutton" name="singlebutton" class="btn btn-primary">Request</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="tbResponse">Response</label>
+                        <div class="controls">
+                            <textarea id="tbResponse" name="tbResponse" style="width: 600px; height: 200px;">{{request.response}}</textarea>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+            </td>
+        </tr>
+    </table>
+</center>
+
+</body>
+</html>
