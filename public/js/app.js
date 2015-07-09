@@ -1,13 +1,21 @@
 angular.module("explorer", [
+        'angular-growl',
         'ui.ace',
         'ngClipboard'
 ])
+
+    .config(['growlProvider', function(growlProvider) {
+        growlProvider.onlyUniqueMessages(false);
+        growlProvider.globalTimeToLive(3000);
+    }])
+
     .config(['ngClipProvider', function(ngClipProvider) {
         ngClipProvider.setPath("//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.swf");
     }])
     .service('apiService', function ($http) {
 
         this.makeRequest = function (request) {
+
 
             var requestData = {
                 baseUrl: request.baseUrl,
@@ -32,7 +40,7 @@ angular.module("explorer", [
         }
 
     })
-    .controller('AppCtrl', function AppCtrl($scope, apiService) {
+    .controller('AppCtrl', function AppCtrl($scope, apiService, growl) {
 
         $scope.disableButton = false;
 
@@ -66,6 +74,12 @@ angular.module("explorer", [
 
         $scope.clearResponse = function () {
             $scope.request.response = '';
-        }
+            growl.success('Response data has been cleared!');
+        };
+
+        $scope.clearRequestData = function () {
+            $scope.request.data = '';
+            growl.success('Request data has been cleared!');
+        };
 
     });
