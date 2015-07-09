@@ -70,7 +70,11 @@
 
                     <div class="control-group">
                         <div class="controls">
-                            <button ng-click="fireRequest()" id="singlebutton" name="singlebutton" class="btn btn-primary">Request</button>
+                            <button ng-click="fireRequest()" id="singlebutton" name="singlebutton" class="btn btn-primary"
+                                    ng-disabled="disableButton" ng-show="!disableButton">Request</button>
+                            <button class="btn btn-primary" ng-show="disableButton">
+                                <i class="fa fa-spinner"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -78,6 +82,12 @@
                         <label class="control-label" for="tbResponse">Response</label>
                         <div class="controls">
                             <textarea id="tbResponse" name="tbResponse" style="width: 600px; height: 200px;">{{request.response}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-primary" ng-click="clearResponse()">Clear Response</button>
                         </div>
                     </div>
 

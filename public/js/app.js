@@ -20,13 +20,15 @@ angular.module("explorer", [])
                     var data = result.data;
                     return data;
                 },
-                function (result) {
-                    return result;
+                function (error) {
+                    return error;
                 });
         }
 
     })
     .controller('AppCtrl', function AppCtrl($scope, apiService) {
+
+        $scope.disableButton = false;
 
         var exampleData = { fileName: '4%25',
             attributes:'',
@@ -46,9 +48,17 @@ angular.module("explorer", [])
         };
 
         $scope.fireRequest = function () {
+            $scope.disableButton = true;
             apiService.makeRequest($scope.request).then(function(result){
+                $scope.disableButton = false;
                 $scope.request.response = JSON.stringify(result.json);
-            });
+            }),function(error){
+                alert(error);
+            };
         };
+
+        $scope.clearResponse = function () {
+            $scope.request.response = '';
+        }
 
     });
